@@ -62,7 +62,7 @@ def dayfinder(num):
 
 @app.route("/")
 def show_date():
-    day_of_year = datetime.utcnow().date().timetuple().tm_yday-1
+    day_of_year = datetime.utcnow().date().timetuple().tm_yday
     month, day_of_month, day_of_week = dayfinder(day_of_year)
 
     # Determine the ordinal suffix for the day
