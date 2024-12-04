@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What day is today?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #9066a5;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            font-size: 5em; /* Adjusts the font size */
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="date-display"></h1>
+
+    <script>
+        // Function to determine the month, day of the month, and day of the week
+        function dayFinder(num) {
+            let month, startDay;
+            if (1 <= num && num <= 28) {
+                month = "Boozer";
+                startDay = 1;
+            } else if (29 <= num && num <= 56) {
+                month = "Chipper";
+                startDay = 29;
+            } else if (57 <= num && num <= 84) {
+                month = "Kucheeder";
+                startDay = 57;
+            } else if (85 <= num && num <= 112) {
+                month = "Warder";
+                startDay = 85;
+            } else if (113 <= num && num <= 140) {
+                month = "Forgorder";
+                startDay = 113;
+            } else if (141 <= num && num <= 168) {
+                month = "Crabber";
+                startDay = 141;
+            } else if (169 <= num && num <= 196) {
+                month = "Monker";
+                startDay = 169;
+            } else if (197 <= num && num <= 224) {
+                month = "Mechanicer";
+                startDay = 197;
+            } else if (225 <= num && num <= 252) {
+                month = "Ferrer";
+                startDay = 225;
+            } else if (253 <= num && num <= 280) {
+                month = "Penner";
+                startDay = 253;
+            } else if (281 <= num && num <= 308) {
+                month = "Juler";
+                startDay = 281;
+            } else if (309 <= num && num <= 336) {
+                month = "Slother";
+                startDay = 309;
+            } else {
+                month = "Skiver";
+                startDay = 337;
+            }
+
+            const dayOfMonth = num - startDay + 1;
+            const lastDigit = num % 10;
+            const dayOfWeek = {
+                1: "Murday",
+                2: "Duoday",
+                3: "Tresday",
+                4: "Issiday",
+                5: "Wensday",
+                6: "Sexday",
+                7: "Curryday",
+                8: "Friday",
+                9: "Saturday",
+                0: "Verday"
+            }[lastDigit] || "unknown";
+
+            return { month, dayOfMonth, dayOfWeek };
+        }
+
+        // Get today's date and calculate day of year
+        const today = new Date();
+        const startOfYear = new Date(today.getFullYear(), 0, 1);
+        const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
+
+        // Use the dayFinder function to determine details
+        const { month, dayOfMonth, dayOfWeek } = dayFinder(dayOfYear);
+
+        // Determine the ordinal suffix for the day
+        const suffix = (dayOfMonth % 10 === 1 && dayOfMonth !== 11) ? "st" :
+                       (dayOfMonth % 10 === 2 && dayOfMonth !== 12) ? "nd" :
+                       (dayOfMonth % 10 === 3 && dayOfMonth !== 13) ? "rd" : "th";
+
+        // Display the result
+        const displayText = `Today is ${dayOfWeek}, the ${dayOfMonth}${suffix} of ${month}!`;
+        document.getElementById("date-display").textContent = displayText;
+    </script>
+</body>
+</html>
+
